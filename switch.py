@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-import weather, temp, datetime
+import weather, temp, datetime, time
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -24,9 +24,10 @@ try:
 			set_temp = (t[0]*1.1)+(t[1]*0.05)
 		read = temp.read_temp()
 		print(set_temp, read)
-		if(set_temp>read):
-			on()
-		else:
-			off()
+		sleep_time = 1-(1/(set_temp-read))
+		on()
+		time.sleep(sleep_time)
+		off()
+
 except KeyboardInterrupt:
 	off()

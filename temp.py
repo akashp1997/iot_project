@@ -14,7 +14,5 @@ def read_temp():
 	pos = f.find('t=')
 	if(pos==-1):
 		return -273
+	f.close()
 	return float(f[pos+2:])/1000.0
-
-
-
